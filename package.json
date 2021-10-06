@@ -1,0 +1,22 @@
+{
+  "name": "war",
+  "version": "1.0.0",
+  "description": "In this exercise you will write some of the code to model the card game [War](https://www.dicegamedepot.com/war-card-game-rules/). In any digital version of any game there are numerous parts working together: user interface, back-end, maybe even a database. In this exercise we will focus on the back end, writing the functions which will perform the core functions of the game.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anandlakhani9/warCardGame.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/anandlakhani9/warCardGame/issues"
+  },
+  "homepage": "https://github.com/anandlakhani9/warCardGame#readme",
+  "dependencies": {
+    "jest": "^27.2.4"
+  }
+}
