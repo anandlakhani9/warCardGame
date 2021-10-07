@@ -31,18 +31,38 @@ Game.prototype.drawCard = function(){
 }
 //compare cards - and add to other's hand
 Game.prototype.compareCards = function(card1, card2) {
-    if(card1.value > card2.value) {
-        this.player1.hand.unshift(card1, card2);
-        //this.player1.hand.unshift(card2);
-        console.log("p1 wins round")
+    if(card1.value >= card2.value) {
+        let randomNumber = Math.floor(2*Math.random());
+        //console.log(randomNumber);
+        if (randomNumber === 1)
+        {
+            this.player1.hand.unshift(card1, card2);
+            //this.player1.hand.unshift(card2);
+        }
+        else 
+        {
+            this.player1.hand.unshift(card2, card1);
+            //this.player1.hand.unshift(card2);
+            
+        }
+        //console.log("p1 wins round") 
         return ("card 1 is higher")
     }
     else if(card2.value > card1.value) 
     {
-        this.player2.hand.unshift(card2);
-        this.player2.hand.unshift(card1);
-        //this.player2.hand.unshift(card2);
-        console.log("p2 wins round")
+        let randomNumber = Math.floor(2*Math.random());
+        if (randomNumber === 1)
+        {
+            this.player2.hand.unshift(card1, card2);
+            //this.player1.hand.unshift(card2);
+        }
+        else 
+        {
+            this.player2.hand.unshift(card2, card1);
+            //this.player1.hand.unshift(card2);
+            
+        }
+        //console.log("p2 wins round") 
         return ("card 2 is higher")
     }
 }
@@ -63,19 +83,25 @@ Game.prototype.playGame = function(){
     console.log(this.player1.hand.length);
     // console.log("\n\n")
     console.log(this.player2.hand.length);
+    //Initialise round counter
+    let roundCounter = 0;
     //all game logic goes in here
     while(this.isPlaying){
-    //for(i=0;i<30;i++){
+    //for(i=0;i<10;i++){
         this.checkWin();
         if(!this.isPlaying){break;}
         //console.log(this.player1.hand.length);
         this.drawCard();
-        console.log(this.player1.currentCard);
-        console.log(this.player2.currentCard);
+        //console.log(this.player1.currentCard);
+        //console.log(this.player2.currentCard);
         this.compareCards(this.player1.currentCard, this.player2.currentCard);
-        console.log("p1 has: " + this.player1.hand.length);
-        console.log("p2 has: " + this.player2.hand.length);
+        //console.log("p1 has: " + this.player1.hand.length);
+        //console.log(this.player1.hand);
+        //console.log("p2 has: " + this.player2.hand.length);
+        //console.log(this.player2.hand);
+        roundCounter++;
     }
+    console.log(`${roundCounter} rounds`);
 }
 
 const game = new Game()

@@ -32,6 +32,11 @@ Deck.prototype.shuffleDeck = function() {
     this.deckShuffled = deck;
 }
 
+/*Deck.prototype.shuffleDeck = function() {
+    const deck = this.deckShuffled;
+    this.deckShuffled = deck;
+}*/
+
 //code taken from stackOverflow
 //used for checking each card is uunique by converting to a set 
 //for later checking the length is what it should be
