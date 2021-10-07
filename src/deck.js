@@ -52,8 +52,8 @@ Deck.prototype.filterSuit = function(suit) {
 }
 
 
-cardDeck = new Deck([]);
-cardDeck.fillDeck();
-cardDeck.filterSuit("CLUBS");
+// cardDeck = new Deck([]);
+// cardDeck.fillDeck();
+// cardDeck.filterSuit("CLUBS");
 
 module.exports = Deck;
