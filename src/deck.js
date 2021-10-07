@@ -47,7 +47,7 @@ Deck.prototype.uniqueArrayLength = function(deckShuffled) {
 Deck.prototype.filterSuit = function(suit) {
     suit = suit.toUpperCase();
     const suitArray = this.deckShuffled.filter((card) => card.suit === suit);
-    console.log(suitArray);
+    //console.log(suitArray);
     return suitArray.length;
 }
 
