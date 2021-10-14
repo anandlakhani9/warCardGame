@@ -83,9 +83,51 @@ test("If the game has been won then its playing state is set to false", () => {
     expect(game.isPlaying).toBe(false);
 })
 
+//test the rounds property is a positive integer when the game has finished
+test("the rounds property is a positive integer when the game has finished", () => {
+    const game = new Game ();
+    game.initGame();
+    game.playGame();
+    expect(game.rounds).toBeGreaterThan(0);
+})
+
 //test the compareCard method works
+test("compareCard works when card2 is higher than card1", () => {
+    const game = new Game ();
+    game.initGame();
+    const card1 = new Card("ten", 10, "Diamond");
+    const card2 = new Card("jack", 11, "Diamond");
+    const result = game.compareCards(card1, card2);
+    expect(result).toBe("card 2 is higher");
+})
 
+test("compareCard works when card1 is higher than card2", () => {
+    const game = new Game();
+    game.initGame();
+    const card1 = new Card("nine", 9, "Diamond");
+    const card2 = new Card("seven", 7, "Diamond");
+    const result = game.compareCards(card1, card2);
+    expect(result).toBe("card 1 is higher");
+})
 
-//test that the winner has their cards added to the deck
+//test that the winner has the cards added to their hand
+test("winner has two cards added to top of hand", () => {
+    const game = new Game();
+    game.initGame();
+    const card1 = new Card("nine", 9, "Diamond");
+    const card2 = new Card("seven", 7, "Diamond");
+    const bothCards = [card1, card2];
+    game.compareCards(card1, card2);
+    const topTwoCards = game.player1.hand.slice(0,2);
+    expect(topTwoCards).toContain(card1, card2);
+})
 
-//test the loser doesn't have cards added to their deck
+//test the loser doesn't have cards added to their hand
+test("loser doesn't have cards added to hand", () => {
+    const game = new Game();
+    game.initGame();
+    const card1 = new Card("nine", 9, "Diamond");
+    const card2 = new Card("seven", 7, "Diamond");
+    game.compareCards(card1, card2);
+    expect(game.player2.hand.length).toBe(26);
+})

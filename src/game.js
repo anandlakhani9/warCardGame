@@ -1,13 +1,15 @@
 const Player = require("../src/players.js");
 const Deck = require("../src/deck.js");
 
-const Game = function(player1="", player2="", isPlaying = false, deck = null, winner = null, loser = null) {
+const Game = function(player1="", player2="", isPlaying = false, deck = null, winner = null, loser = null,
+                      rounds= null) {
     this.player1 = player1;
     this.player2 = player2;
     this.isPlaying = isPlaying;
     this.deck = deck;
     this.winner = winner;
     this.loser = loser;
+    this.rounds = rounds;
 }
 
 
@@ -115,7 +117,7 @@ Game.prototype.playGame = function(){
         //console.log(this.player2.hand);
         roundCounter++;
     }
-    console.log(`${roundCounter} rounds`);
+    this.rounds = roundCounter;
 }
 
 const game = new Game()
