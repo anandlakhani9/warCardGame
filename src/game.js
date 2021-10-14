@@ -1,11 +1,13 @@
 const Player = require("../src/players.js");
 const Deck = require("../src/deck.js");
 
-const Game = function(player1="", player2="", isPlaying = false, deck = null) {
+const Game = function(player1="", player2="", isPlaying = false, deck = null, winner = null, loser = null) {
     this.player1 = player1;
     this.player2 = player2;
     this.isPlaying = isPlaying;
     this.deck = deck;
+    this.winner = winner;
+    this.loser = loser;
 }
 
 
@@ -18,8 +20,16 @@ Game.prototype.initGame = function(player1Name, player2Name){
     this.deck.fillDeck();
     this.deck.shuffleDeck();
     //give cards to players
-    this.player1.hand = this.deck.deckShuffled.slice(0,26);
-    this.player2.hand = this.deck.deckShuffled.slice(26,52);
+    this.deck.deckShuffled.forEach((card, index) => {
+        if(index % 2 === 0) {
+            this.player1.hand.push(this.deck.deckShuffled[index]);
+        } else {
+            this.player2.hand.push(this.deck.deckShuffled[index]);
+        }
+    })
+    //give cards to players
+    //this.player1.hand = this.deck.deckShuffled.slice(0,26);
+    //this.player2.hand = this.deck.deckShuffled.slice(26,52);
     this.isPlaying = true;
 }
 
@@ -69,12 +79,16 @@ Game.prototype.compareCards = function(card1, card2) {
 
 Game.prototype.checkWin = function () {
     if (this.player1.hand.length === 52){
-        console.log("Player 1 wins")
+        //console.log("Player 1 wins")
         this.isPlaying = false;
+        this.winner = this.player1.name;
+        this.loser = this.player2.name
     }
     else if (this.player2.hand.length === 52){
-        console.log("Player 2 wins")
+        //console.log("Player 2 wins")
         this.isPlaying = false;
+        this.winner = this.player2.name;
+        this.loser = this.player1.name;
     }
 }
 

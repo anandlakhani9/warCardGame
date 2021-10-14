@@ -1,6 +1,6 @@
 const Deck = require("../src/deck.js");
 const Player = require("../src/players.js");
-const Card = require("../src/card.js")
+const Card = require("../src/card.js");
 
 //test they can have a name 
 test ("player has a name", function(){
