@@ -16,7 +16,7 @@
     "url": "https://github.com/anandlakhani9/warCardGame/issues"
   },
   "homepage": "https://github.com/anandlakhani9/warCardGame#readme",
-  "dependencies": {
-    "jest": "^27.2.4"
+  "devDependencies": {
+    "jest": "^27.2.5"
   }
 }
