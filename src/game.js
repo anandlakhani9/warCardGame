@@ -108,7 +108,8 @@ Game.prototype.compareCards = function(card1, card2) {
         this.player1.clearWarHand();
         this.player2.clearWarHand();
         console.log("p2 wins round");
-        console.log(this.player1.hand); 
+        console.log(this.player1.hand);
+        console.log(this.player2.hand); 
         this.war = false;
         return ("card 2 is higher");
      } else {
@@ -118,14 +119,14 @@ Game.prototype.compareCards = function(card1, card2) {
 }
 
 Game.prototype.checkWin = function () {
-    if (this.player1.hand.length === 52){
+    if (this.player1.hand.length === 0){
         //console.log("Player 1 wins")
         this.isPlaying = false;
         this.winner = this.player1.name;
         this.loser = this.player2.name
         console.log('yoyo');
     }
-    else if (this.player2.hand.length === 52){
+    else if (this.player2.hand.length === 0){
         //console.log("Player 2 wins")
         this.isPlaying = false;
         this.winner = this.player2.name;
@@ -135,25 +136,39 @@ Game.prototype.checkWin = function () {
 }
 Game.prototype.warPlay = function() {
     console.log("Hello")
+    console.log(this.war);
     while(this.war){
         if(this.player1.hand.length > 1 && this.player2.hand.length > 1)
         {
+            console.log("gldkjg");
             this.player1.createWarHand();
+            console.log(this.player1.warHand[0]);
             this.player2.createWarHand();
+            console.log(this.player2.warHand[0]),
             this.compareCards(this.player1.warHand[0], this.player2.warHand[0]) 
         }
         else if (this.player1.hand.length < 2){
-            for (let i = 0; i < this.player1.warHand.length; i++){
-                this.player2.hand.unshift(this.player2.warHand[i], this.player1.warHand[i])
+            console.log("peen");
+            for (let i = 0; i < this.player1.hand.length; i++){
+                this.player2.hand.unshift(this.player1.hand.pop());
+                //this.player2.hand.unshift(this.player2.warHand[i], this.player1.warHand[i])
             };
-            this.player1.hand = [];
+            // for (let i = 0; i < this.player1.warHand.length; i++){
+            //     this.player2.hand.unshift(this.player2.warHand[i], this.player1.warHand[i])
+            // };
+            //this.player1.hand = [];
             this.war = false;
         }
         else {
-            for (let i = 0; i < this.player1.warHand.length; i++){
-                this.player1.hand.unshift(this.player2.warHand[i], this.player1.warHand[i])
+            console.log("leen");
+            for (let i = 0; i < this.player2.hand.length; i++){
+                this.player1.hand.unshift(this.player2.hand.pop());
+                //this.player1.hand.unshift(this.player2.warHand[i], this.player1.warHand[i])
             };
-            this.player2.hand = [];
+            // for (let i = 0; i < this.player1.warHand.length; i++){
+            //     this.player1.hand.unshift(this.player2.warHand[i], this.player1.warHand[i])
+            // };
+            //this.player2.hand = [];
             this.war = false;
         }
     }
