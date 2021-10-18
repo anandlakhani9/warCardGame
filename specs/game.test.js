@@ -27,7 +27,7 @@ test("test that player 1 is updated as the winner when they have 52 cards", () =
     game.player1.hand = deck.deckShuffled;
     game.player2.hand = [];
     game.checkWin();
-    expect(game.winner).toBe(game.player1.name);
+    expect(game.winner.hand).toBe(game.player1.hand);
 })
 
 //test that player 2 is updated as the loser when they have 0 cards
@@ -39,7 +39,7 @@ test("test that player 2 is updated as the loser when they have 0 cards", () => 
     game.player1.hand = deck.deckShuffled;
     game.player2.hand = [];
     game.checkWin();
-    expect(game.loser).toBe(game.player2.name);
+    expect(game.loser.hand).toBe(game.player2.hand);
 })
 
 
@@ -52,7 +52,7 @@ test("test that player 2 is updated as the winner when they have 52 cards", () =
     game.player2.hand = deck.deckShuffled;
     game.player1.hand = [];
     game.checkWin();
-    expect(game.winner).toBe(game.player2.name);
+    expect(game.winner.hand).toBe(game.player2.hand);
 })
 
 //test that player 1 is updated as the loser when they have 0 cards
@@ -64,7 +64,7 @@ test("test that player 1 is updated as the loser when they have 0 cards", () => 
     game.player2.hand = deck.deckShuffled;
     game.player1.hand = [];
     game.checkWin();
-    expect(game.loser).toBe(game.player1.name);
+    expect(game.loser.hand).toBe(game.player1.hand);
 })
 
 //test the game has not been won when neither player has 52 cards
@@ -119,7 +119,7 @@ test("winner has two cards added to top of hand", () => {
     const bothCards = [card1, card2];
     game.compareCards(card1, card2);
     const topTwoCards = game.player1.hand.slice(0,2);
-    expect(topTwoCards).toContain(card1, card2);
+    expect(topTwoCards.entries).toBe(bothCards.entries);
 })
 
 //test the loser doesn't have cards added to their hand
@@ -130,4 +130,34 @@ test("loser doesn't have cards added to hand", () => {
     const card2 = new Card("seven", 7, "Diamond");
     game.compareCards(card1, card2);
     expect(game.player2.hand.length).toBe(26);
+})
+
+//test the round winner is updated to player 1 when they draw a higher card
+test("round winner is updated to player 1", () => {
+    const game = new Game(new Player("John"), new Player("Sally"));
+    game.initGame();
+    const card1 = new Card("nine", 9, "Diamond");
+    const card2 = new Card("seven", 7, "Diamond");
+    game.compareCards(card1, card2);
+    expect(JSON.stringify(game.roundWinner)).toBe(JSON.stringify(game.player1));
+})
+
+//test the round winner is updated to player 2 when they draw a higher card
+test("round winner is updated to player 2", () => {
+    const game = new Game(new Player("John"), new Player("Sally"));
+    game.initGame();
+    const card2 = new Card("nine", 9, "Diamond");
+    const card1 = new Card("seven", 7, "Diamond");
+    game.compareCards(card1, card2);
+    expect(JSON.stringify(game.roundWinner)).toBe(JSON.stringify(game.player2));
+})
+
+//test that if a drawer war is set to true
+test("If a drawer, war is set to true", () => {
+    const game = new Game();
+    game.initGame();
+    const card1 = new Card("nine", 9, "Diamond");
+    const card2 = new Card("nine", 9, "Diamond");
+    game.compareCards(card1, card2);
+    expect(game.war).toBe(true);
 })

@@ -44,7 +44,7 @@ test("test the hand has shrunk by 1", () => {
 })
 
 //test the warHand has a length of three when the warHand function is called
-test("the deck shrinks by two when the warHand function is called", () => {
+test("test the warHand has a length of three when the warHand function is called", () => {
     const deck = new Deck([]);
     deck.fillDeck();
     deck.shuffleDeck();
@@ -54,4 +54,15 @@ test("the deck shrinks by two when the warHand function is called", () => {
     const singleCardWarHand = player.warHand.length;
     player.createWarHand();
     expect(player.warHand.length).toBe(singleCardWarHand + 2);
+})
+
+//test the clear warHand function clears the warHand object
+test("the clear warHand function clears the warHand", () => {
+    const deck = new Deck([]);
+    deck.fillDeck();
+    deck.shuffleDeck();
+    const player = new Player("Person", deck.deckShuffled);
+    player.giveCurrentCard();
+    player.clearWarHand();
+    expect(player.warHand.length).toBe(0);
 })
